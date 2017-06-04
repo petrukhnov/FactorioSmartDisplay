@@ -1,0 +1,29 @@
+##VERSIONS:
+
+1.1.0   - factorio 0.15 compatible
+1.0.17	- optimization : better refresh only when needed
+		- now copy paste all settings using shift-RMB, shift-LMB.
+		- interface (for those who are using a lot of SD on their map, it could be useful to relax some values
+		  to avoid possible lags)
+			/c remote.call( "smartdisplay", "refresh", 6 ) to increase refresh time x6
+			/c remote.call( "smartdisplay", "refresh", 1 ) to revert refresh time to original (4 times per second)
+			/c remote.call( "smartdisplay", "mapmark", false ) to disable all mapmarks
+			/c remote.call( "smartdisplay", "mapmark", true ) to enable all mapmarks
+			/c remote.call( "smartdisplay", "radar", false ) to disable all radars
+			/c remote.call( "smartdisplay", "radar", true ) to enable all radars
+		- correct update divisor when menu opening
+1.0.14	- factorio 0.14 compatible
+1.0.13	- now displays the sum of red and green networks signals if available.
+1.0.12	- add circuit network as a research pre-requisite for smart display
+1.0.11	- corrects a migration version compare mistake
+1.0.10	- change window organisation. Use text changed event. Suppress the update button, useless now.
+1.0.9	- minor foxes
+1.0.8	- 0.13 compatible. rework of initialisation routines. Custom license.
+1.0.7	- integrate a little radar in the device, so that even at long distance, on the map, despite the fog of war, the values are still updated.
+1.0.6	- bug on config change.
+1.0.5	- add x1.5 scale, thousands separator and kilo/mega/giga/tera divisors.
+1.0.4	- option to display the message also on the general map ("M" key).
+1.0.3	- better management of display priority : player can now walk nicely on the smartdisplay.
+1.0.2	- german locale by HeiRos
+1.0.1	- check non recognized unicode char to avoid crash
+1.0.0	- Initial release!
