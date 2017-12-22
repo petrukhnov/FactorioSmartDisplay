@@ -6,6 +6,18 @@ require("config")
 
 local aligns = {left = 1, center = 2, right = 3}
 
+-- taken from Nixie Tubes by GopherAtl and justarandomgeek
+local signalColorMap = {
+  ["off"]           = {r=1.0,  g=1.0,  b=1.0, a=1}, -- off state, no glow
+  ["default"]       = {r=1.0,  g=0.6,  b=0.2, a=1}, -- pretty close to original-orange
+  ["signal-red"]    = {r=1.0,  g=0.2,  b=0.2, a=1},
+  ["signal-green"]  = {r=0.2,  g=1.0,  b=0.2, a=1},
+  ["signal-blue"]   = {r=0.6,  g=0.6,  b=1.0, a=1}, -- pure blue is too dark, so brighten it up just a little bit
+  ["signal-yellow"] = {r=1.0,  g=1.0,  b=0.2, a=1},
+  ["signal-pink"]   = {r=1.0,  g=0.4,  b=1.0, a=1},
+  ["signal-cyan"]   = {r=0.0,  g=1.0,  b=1.0, a=1},
+}
+
 --------------------------------------------------------------------------------------
 local function set_thousands( s )
 	local s2 = ""
@@ -110,6 +122,23 @@ local function get_signal_value(entity)
 	return(val)
 end
 
+local function getAlphaSignals(entity,wire_type,charsig,colorsig)
+  local net = entity.get_circuit_network(wire_type)
+
+  local ch,co = charsig,colorsig
+
+  if net then
+    for _,s in pairs(net.signals) do
+      if signalColorMap[s.signal.name] then
+        co = signalColorMap[s.signal.name]
+      end
+    end
+  end
+
+  return ch,co
+end
+
+
 --------------------------------------------------------------------------------------
 local function update_display(display,force)
 	local ent = display.entity
@@ -135,6 +164,15 @@ local function update_display(display,force)
 	local surf = ent.surface
 	local force = ent.force
 	
+	  local _,color = nil,nil
+	  if display.use_colors then
+		 _,color=getAlphaSignals(entity,defines.wire_type.red,_,color)
+		 _,color=getAlphaSignals(entity,defines.wire_type.green,_,color)
+	  end
+	  if color == nil then
+		color = signalColorMap["default"]
+	  end
+	  
 	if v == nil then 
 		if display.leading_zeros and lfix > 0 then
 			s = string.rep( "-", lfix )
@@ -225,7 +263,7 @@ local function show_menu_display(player, display)
 	
 	if gui1 == nil then
 		gui1 = player.gui.left.add({type = "frame", name = "frame_smadisp", caption = "Smart display", direction = "vertical", style = "smadisp_frame_style"})
-		local guif2 = gui1.add({type = "flow", name = "flow_smadisp", direction = "vertical", style = "smadisp_flow_style"})
+		local guif2 = gui1.add({type = "flow", name = "flow_smadisp", direction = "vertical", style = "smadisp_vertical_flow_style"})
 
 		local gui3 = guif2.add({type = "flow", name = "flow_prefix", direction = "horizontal", style = "smadisp_flow_style"})
 		gui3.add({type = "label", name = "label_prefix", caption = {"gui-smadisp-prefix"}, style = "smadisp_label_style"})
@@ -252,18 +290,18 @@ local function show_menu_display(player, display)
 		gui3.add({type = "button", name = "but_lfix_reset", caption = "X", style = "smadisp_button_style"})	
 
 		gui3 = guif2.add({type = "flow", name = "flow_form1", direction = "horizontal", style = "smadisp_flow_style"})
-		gui3.add({type = "checkbox", name = "chk_lead", caption = {"gui-smadisp-lead"}, state = false, style = "checkbox_style"})
-		gui3.add({type = "checkbox", name = "chk_thousands", caption = {"gui-smadisp-thousands"}, state = false, style = "checkbox_style"})
+		gui3.add({type = "checkbox", name = "chk_lead", caption = {"gui-smadisp-lead"}, state = false, style = "checkbox"})
+		gui3.add({type = "checkbox", name = "chk_thousands", caption = {"gui-smadisp-thousands"}, state = false, style = "checkbox"})
 
 		gui3 = guif2.add({type = "flow", name = "flow_form2", direction = "horizontal", style = "smadisp_flow_style"})
-		gui3.add({type = "checkbox", name = "chk_kilo", caption = "k(ilo)", state = false, style = "checkbox_style"})
-		gui3.add({type = "checkbox", name = "chk_mega", caption = "M(ega)", state = false, style = "checkbox_style"})
-		gui3.add({type = "checkbox", name = "chk_giga", caption = "G(iga)", state = false, style = "checkbox_style"})
-		gui3.add({type = "checkbox", name = "chk_tera", caption = "T(era)", state = false, style = "checkbox_style"})
+		gui3.add({type = "checkbox", name = "chk_kilo", caption = "k(ilo)", state = false, style = "checkbox"})
+		gui3.add({type = "checkbox", name = "chk_mega", caption = "M(ega)", state = false, style = "checkbox"})
+		gui3.add({type = "checkbox", name = "chk_giga", caption = "G(iga)", state = false, style = "checkbox"})
+		gui3.add({type = "checkbox", name = "chk_tera", caption = "T(era)", state = false, style = "checkbox"})
 
 		gui3 = guif2.add({type = "flow", name = "flow_map", direction = "horizontal", style = "smadisp_flow_style"})
 		gui3.add({type = "label", name = "label_map", caption = {"gui-smadisp-map"}, style = "smadisp_label_style"})
-		gui3.add({type = "checkbox", name = "chk_map", caption = "", state = false, style = "checkbox_style"})
+		gui3.add({type = "checkbox", name = "chk_map", caption = "", state = false, style = "checkbox"})
 
 		-- gui3 = guif2.add({type = "flow", name = "flow_action", direction = "horizontal", style = "smadisp_flow_style"})
 		-- gui3.add({type = "button", name = "but_update", caption = {"gui-smadisp-update"}, style = "smadisp_button_style"})
@@ -446,6 +484,7 @@ local function on_creation( event )
 			precision = 0,
 			lfix = 0, -- 0 if length adapt to content, otherwise fixed
 			leading_zeros = false,
+			color = nil,
 			thousands = false,
 			divisor = 1,
 		}
@@ -488,7 +527,7 @@ end
 
 script.on_event(defines.events.on_entity_died, on_destruction )
 script.on_event(defines.events.on_robot_pre_mined, on_destruction )
-script.on_event(defines.events.on_preplayer_mined_item, on_destruction )
+script.on_event(defines.events.on_pre_player_mined_item, on_destruction )
 
 --------------------------------------------------------------------------------------
 local function on_entity_settings_pasted(event)

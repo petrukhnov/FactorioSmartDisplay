@@ -7,6 +7,7 @@ data:extend(
 		icon = "__SmartDisplayRedux__/graphics/smart-display-icon.png",
         flags = {"goes-to-quickbar"},
 		subgroup = "circuit-network",
+		icon_size=32,
 		order = "b[combinators]-e[smart-display]",
         place_result = "smart-display-visible",
         stack_size = 50
@@ -16,6 +17,7 @@ data:extend(
 		type = "recipe",
 		name = "smart-display-visible",
 		enabled = false,
+		icon_size=32,
 		ingredients =
 		{
 			{"copper-cable", 5},
@@ -29,6 +31,7 @@ data:extend(
 		name =  "smart-display-visible",
 		icon = "__SmartDisplayRedux__/graphics/smart-display-icon.png",
 		flags = {"placeable-neutral", "player-creation", "not-on-map"},
+		icon_size=32,
 		order = "y",
 		minable = {hardness = 0.2, mining_time = 0.5, result = "smart-display-visible"},
 		max_health = 55,
@@ -44,6 +47,7 @@ data:extend(
 		},
 		energy_usage_per_tick = "5KW",
 		light = {intensity = 0.0, size = 0, color = colors.white},
+		color = "",
 		picture_off =
 		{
 			filename = "__SmartDisplayRedux__/graphics/smart-display.png",
@@ -178,6 +182,7 @@ local smallradar =
 	name = "smart-display-radar",
 	icon = "__base__/graphics/icons/radar.png",
 	flags = {"placeable-player", "player-creation"},
+	icon_size=32,
 	order = "yz",
 	minable = {hardness = 0.2, mining_time = 0.5, result = "radar"},
 	selectable_in_game = false,

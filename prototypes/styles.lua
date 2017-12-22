@@ -38,8 +38,17 @@ default_gui.smadisp_frame_style =
 	right_padding = spacing_vertical,
 	resize_row_to_width = true,
 	max_on_row = 1,
-	flow_style=
+	vertical_flow_style=
 	{
+		type = "vertical_flow_style",
+		horizontal_spacing = spacing_right,
+		vertical_spacing = spacing_vertical,
+		resize_row_to_width = true,
+		resize_to_row_height = false
+	},
+	horizontal_flow_style=
+	{
+		type = "horizontal_flow_style",
 		horizontal_spacing = spacing_right,
 		vertical_spacing = spacing_vertical,
 		resize_row_to_width = true,
@@ -49,7 +58,27 @@ default_gui.smadisp_frame_style =
 
 default_gui.smadisp_flow_style = 
 {
-	type = "flow_style",
+	type = "horizontal_flow_style",
+	
+	top_padding = spacing_vertical,
+	bottom_padding = spacing_vertical,
+	left_padding = 0,
+	right_padding = spacing_right,
+	
+	horizontal_spacing = spacing_right,
+	vertical_spacing = spacing_vertical,
+	--max_on_row = 1,
+	--resize_row_to_width = true,
+	max_on_row = 0,
+	resize_row_to_width = false,
+	resize_to_row_height = false,
+	
+	graphical_set = { type = "none" },
+}
+
+default_gui.smadisp_vertical_flow_style = 
+{
+	type = "vertical_flow_style",
 	
 	top_padding = spacing_vertical,
 	bottom_padding = spacing_vertical,
@@ -70,7 +99,7 @@ default_gui.smadisp_flow_style =
 default_gui.smadisp_progressbar_style = 
 {
 	type="progressbar_style",
-	parent="progressbar_style",
+	parent="progressbar",
 	font="smadisp_font_bold",
 	top_padding = 0,
 	bottom_padding = 0,
@@ -78,10 +107,10 @@ default_gui.smadisp_progressbar_style =
 	right_padding = spacing_right,
 }
 
-default_gui.smadisp_checkbox_style = 
+default_gui.smadisp_checkbox_style =
 {
 	type="checkbox_style",
-	parent="checkbox_style",
+	parent="checkbox",
 	font="smadisp_font_bold",
 	top_padding = 0,
 	bottom_padding = 0,

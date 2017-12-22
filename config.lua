@@ -7,7 +7,7 @@ font_tint = {r=1,g=1,b=1,a=1} -- change the default color of the font
 font_height = 26
 font_width = 19
 under_height = 32
-under_width = 7
+under_width = 3
 
 first_asc = 32
 last_asc = 126
