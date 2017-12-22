@@ -1,5 +1,5 @@
 -- debug_status = 1
-debug_mod_name = "SmartDisplay"
+debug_mod_name = "SmartDisplayRedux"
 debug_file = debug_mod_name .. "-debug.txt"
 require("utils")
 require("config")

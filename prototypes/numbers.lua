@@ -16,10 +16,10 @@ function add_font_with_scale( font_scale )
 				selectable_in_game = false,
 				collision_box = collision_box,
 				collision_mask = collision_mask,
-				render_layer = "higher-object-under",
+				render_layer = "lower-object",
 				pictures =
 				{
-					filename = "__SmartDisplay__/graphics/font-arial.png",
+					filename = "__SmartDisplayRedux__/graphics/font-arial.png",
 					priority = "low",
 					tint = font_tint,
 					x = (asc%10) * font_width,
@@ -43,10 +43,10 @@ function add_font_with_scale( font_scale )
 			selectable_in_game = false,
 			collision_box = collision_box,
 			collision_mask = collision_mask,
-			render_layer = "higher-object-under",
+			render_layer = "lower-object",
 			pictures =
 			{
-				filename = "__SmartDisplay__/graphics/gunder.png",
+				filename = "__SmartDisplayRedux__/graphics/gunder.png",
 				priority = "low",
 				x = font_width - under_width,
 				y = 0,
@@ -67,10 +67,10 @@ function add_font_with_scale( font_scale )
 			selectable_in_game = false,
 			collision_box = collision_box,
 			collision_mask = collision_mask,
-			render_layer = "higher-object-under",
+			render_layer = "lower-object",
 			pictures =
 			{
-				filename = "__SmartDisplay__/graphics/gunder.png",
+				filename = "__SmartDisplayRedux__/graphics/gunder.png",
 				priority = "low",
 				x = font_width,
 				y = 0,
@@ -91,10 +91,10 @@ function add_font_with_scale( font_scale )
 			selectable_in_game = false,
 			collision_box = collision_box,
 			collision_mask = collision_mask,
-			render_layer = "higher-object-under",
+			render_layer = "lower-object",
 			pictures =
 			{
-				filename = "__SmartDisplay__/graphics/gunder.png",
+				filename = "__SmartDisplayRedux__/graphics/gunder.png",
 				priority = "low",
 				x = font_width*2,
 				y = 0,

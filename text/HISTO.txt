@@ -1,5 +1,6 @@
 ##VERSIONS:
 
+1.1.1   - fixed bug with names
 1.1.0   - factorio 0.15 compatible
 1.0.17	- optimization : better refresh only when needed
 		- now copy paste all settings using shift-RMB, shift-LMB.

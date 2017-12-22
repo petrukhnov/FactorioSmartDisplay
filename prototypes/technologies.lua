@@ -5,7 +5,7 @@ data:extend(
 	{
 		type = "technology",
 		name = "smart-display",
-		icon = "__SmartDisplay__/graphics/smart-displaying.png",
+		icon = "__SmartDisplayRedux__/graphics/smart-displaying.png",
 		icon_size = 128,
 		effects =
 		{
