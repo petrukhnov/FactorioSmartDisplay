@@ -74,6 +74,7 @@ local function add_mapmark( display )
 	if display.mapmark == nil then
 		local ent = display.entity
 		local mapmark = ent.surface.create_entity({name = "smart-display-mapmark", force = game.forces.neutral, position = ent.position})
+		script.raise_event(defines.events.on_built_entity, {created_entity = mapmark})
 		mapmark.operable = false
 		mapmark.active = false
 		display.mapmark = mapmark
@@ -217,7 +218,7 @@ local function update_display(display,force)
 	slen = string.len(s)
 	
 	if display.mapmark then
-		display.mapmark.backer_name = s
+			display.mapmark.backer_name = s
 	end
 	
 	if display.align == aligns.right then
