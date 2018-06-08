@@ -586,7 +586,7 @@ local function on_tick(event)
 
 			-- look for an opened display interface
 			for _, player in pairs(game.players) do
-				if player.connected then
+				if player.connected  and (player.opened_gui_type == defines.gui_type.none or player.opened_gui_type == defines.gui_type.entity) then
 					local opened = player.opened
 					local close_previous = true
 					local open_new = false
